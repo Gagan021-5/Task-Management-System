@@ -1,8 +1,8 @@
-# TaskFlow — Task Management System
+# Taskify — Task Management System
 
 A full-stack **Task Management System** built with React, Node.js, Express, MongoDB, and Socket.io for real-time updates.
 
-## 🚀 Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -16,7 +16,7 @@ A full-stack **Task Management System** built with React, Node.js, Express, Mong
 | **Testing** | Jest + Supertest (backend) |
 | **Containerization** | Docker + Docker Compose |
 
-## 📋 Features
+## Features
 
 - **Authentication**: JWT-based registration, login, and session management
 - **Role-based Access**: Admin and User roles with protected routes
@@ -29,7 +29,7 @@ A full-stack **Task Management System** built with React, Node.js, Express, Mong
 - **Responsive Design**: Mobile-first, fully responsive UI
 - **Dark Theme**: Premium glassmorphic dark mode design
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 Task Management/
@@ -65,7 +65,7 @@ Task Management/
 └── .env.example
 ```
 
-## ⚡ Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js ≥ 18
@@ -118,7 +118,7 @@ This starts:
 - **MongoDB**: localhost:27017
 - **API Docs**: http://localhost:5000/api-docs
 
-## 🔑 Environment Variables
+## Environment Variables
 
 | Variable | Description | Default |
 |----------|-------------|---------|
@@ -129,7 +129,7 @@ This starts:
 | `JWT_EXPIRE` | JWT expiration | `7d` |
 | `CLIENT_URL` | Frontend URL (CORS) | `http://localhost:3000` |
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### Auth (`/api/auth`)
 | Method | Endpoint | Description | Access |
@@ -160,7 +160,7 @@ This starts:
 
 **Query Parameters**: `?status=`, `?priority=`, `?sort=`, `?order=`, `?page=`, `?limit=`, `?search=`
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Backend tests
@@ -168,7 +168,7 @@ cd server
 npm test
 ```
 
-## 🔌 Socket.io Events
+## Socket.io Events
 
 | Event | Direction | Description |
 |-------|-----------|-------------|
@@ -177,6 +177,6 @@ npm test
 | `task:deleted` | Server → Client | Task removed |
 | `task:statusChanged` | Server → Client | Status changed |
 
-## 📄 License
+## License
 
 MIT

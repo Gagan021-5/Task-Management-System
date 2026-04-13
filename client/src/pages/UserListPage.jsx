@@ -20,13 +20,13 @@ const UserListPage = () => {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
 
-  // Edit modal
+
   const [editModal, setEditModal] = useState(false);
   const [editForm, setEditForm] = useState({ name: '', email: '', role: '' });
   const [editingUser, setEditingUser] = useState(null);
   const [saving, setSaving] = useState(false);
 
-  // Delete modal
+
   const [deleteModal, setDeleteModal] = useState(false);
   const [deletingUser, setDeletingUser] = useState(null);
   const [deleting, setDeleting] = useState(false);
@@ -92,7 +92,7 @@ const UserListPage = () => {
 
   return (
     <div className="page-container">
-      {/* Header */}
+
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 animate-slide-up">
         <div>
           <h1 className="text-2xl font-bold text-white">User Management</h1>
@@ -100,7 +100,7 @@ const UserListPage = () => {
         </div>
       </div>
 
-      {/* Search */}
+
       <div className="glass-card p-4 mb-6 animate-slide-up" style={{ animationDelay: '100ms' }}>
         <div className="relative">
           <HiOutlineMagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
@@ -115,11 +115,11 @@ const UserListPage = () => {
         </div>
       </div>
 
-      {/* Table */}
+
       <div className="glass-card overflow-hidden animate-slide-up" style={{ animationDelay: '200ms' }}>
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <div className="w-10 h-10 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin" />
+            <div className="w-10 h-10 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin" />
           </div>
         ) : users.length === 0 ? (
           <div className="text-center py-16">
@@ -163,7 +163,7 @@ const UserListPage = () => {
                       <div className="flex items-center justify-end gap-1">
                         <button
                           onClick={() => openEditModal(u)}
-                          className="p-2 rounded-lg text-slate-400 hover:text-brand-400 hover:bg-brand-400/10 transition-all"
+                          className="p-2 rounded-lg text-slate-400 hover:text-indigo-400 hover:bg-indigo-400/10 transition-all"
                           title="Edit"
                         >
                           <HiOutlinePencilSquare className="w-4 h-4" />
@@ -193,7 +193,7 @@ const UserListPage = () => {
         )}
       </div>
 
-      {/* Edit Modal */}
+
       <Modal isOpen={editModal} onClose={() => setEditModal(false)} title="Edit User">
         <form onSubmit={handleEdit} className="space-y-4">
           <div>
@@ -239,7 +239,7 @@ const UserListPage = () => {
         </form>
       </Modal>
 
-      {/* Delete Modal */}
+
       <Modal isOpen={deleteModal} onClose={() => setDeleteModal(false)} title="Delete User">
         <p className="text-slate-300 mb-6">
           Are you sure you want to delete <strong>"{deletingUser?.name}"</strong>?

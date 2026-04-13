@@ -49,7 +49,7 @@ const TaskListPage = () => {
 
   return (
     <div className="page-container">
-      {/* Header */}
+
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 animate-slide-up">
         <div>
           <h1 className="text-2xl font-bold text-white">Tasks</h1>
@@ -63,7 +63,7 @@ const TaskListPage = () => {
         </Link>
       </div>
 
-      {/* Filters */}
+
       <div className="animate-slide-up" style={{ animationDelay: '100ms' }}>
         <TaskFilters
           filters={filters}
@@ -72,10 +72,10 @@ const TaskListPage = () => {
         />
       </div>
 
-      {/* Task list */}
+
       {loading ? (
         <div className="flex items-center justify-center py-20">
-          <div className="w-12 h-12 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin" />
+          <div className="w-12 h-12 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin" />
         </div>
       ) : tasks.length === 0 ? (
         <div className="text-center py-20 animate-fade-in">

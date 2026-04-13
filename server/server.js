@@ -1,27 +1,25 @@
-const http = require('http');
-const { Server } = require('socket.io');
-const dotenv = require('dotenv');
-const path = require('path');
-const fs = require('fs');
+import http from 'http';
+import { Server } from 'socket.io';
+import dotenv from 'dotenv';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import app from './src/app.js';
+import connectDB from './src/config/db.js';
 
-// Load env vars
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 dotenv.config({ path: path.join(__dirname, '.env') });
 
-const app = require('./src/app');
-const connectDB = require('./src/config/db');
-
-// Ensure uploads directory exists
 const uploadsDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
 const PORT = process.env.PORT || 5000;
-
-// Create HTTP server
 const server = http.createServer(app);
 
-// Socket.io setup
 const io = new Server(server, {
   cors: {
     origin: process.env.CLIENT_URL || 'http://localhost:3000',
@@ -30,19 +28,13 @@ const io = new Server(server, {
   },
 });
 
-// Make io accessible in controllers
 app.set('io', io);
 
-// Socket.io connection handling
 io.on('connection', (socket) => {
   console.log(`Client connected: ${socket.id}`);
-
-  socket.on('disconnect', () => {
-    console.log(`Client disconnected: ${socket.id}`);
-  });
+  socket.on('disconnect', () => console.log(`Client disconnected: ${socket.id}`));
 });
 
-// Connect to DB and start server
 const startServer = async () => {
   try {
     await connectDB();
@@ -58,10 +50,7 @@ const startServer = async () => {
 
 startServer();
 
-// Handle unhandled rejections
 process.on('unhandledRejection', (err) => {
   console.error('Unhandled Rejection:', err.message);
   server.close(() => process.exit(1));
 });
-
-module.exports = server;

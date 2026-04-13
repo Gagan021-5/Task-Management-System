@@ -1,49 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const { register, login, getMe } = require('../controllers/authController');
-const { protect } = require('../middleware/auth');
-const validate = require('../middleware/validate');
-const { registerValidator, loginValidator } = require('../validators/auth.validator');
+import { Router } from 'express';
+import { register, login, getMe } from '../controllers/authController.js';
+import { protect } from '../middleware/auth.js';
+import validate from '../middleware/validate.js';
+import { registerValidator, loginValidator } from '../validators/auth.validator.js';
 
-/**
- * @swagger
- * components:
- *   schemas:
- *     User:
- *       type: object
- *       properties:
- *         _id:
- *           type: string
- *         name:
- *           type: string
- *         email:
- *           type: string
- *         role:
- *           type: string
- *           enum: [user, admin]
- *         createdAt:
- *           type: string
- *           format: date-time
- *     AuthResponse:
- *       type: object
- *       properties:
- *         success:
- *           type: boolean
- *         message:
- *           type: string
- *         data:
- *           type: object
- *           properties:
- *             user:
- *               $ref: '#/components/schemas/User'
- *             token:
- *               type: string
- *   securitySchemes:
- *     bearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
- */
+const router = Router();
 
 /**
  * @swagger
@@ -59,27 +20,12 @@ const { registerValidator, loginValidator } = require('../validators/auth.valida
  *             type: object
  *             required: [name, email, password]
  *             properties:
- *               name:
- *                 type: string
- *                 example: John Doe
- *               email:
- *                 type: string
- *                 example: john@example.com
- *               password:
- *                 type: string
- *                 example: password123
- *               role:
- *                 type: string
- *                 enum: [user, admin]
+ *               name: { type: string }
+ *               email: { type: string }
+ *               password: { type: string }
+ *               role: { type: string, enum: [user, admin] }
  *     responses:
- *       201:
- *         description: User registered successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/AuthResponse'
- *       409:
- *         description: User already exists
+ *       201: { description: User registered successfully }
  */
 router.post('/register', validate(registerValidator), register);
 
@@ -97,21 +43,10 @@ router.post('/register', validate(registerValidator), register);
  *             type: object
  *             required: [email, password]
  *             properties:
- *               email:
- *                 type: string
- *                 example: john@example.com
- *               password:
- *                 type: string
- *                 example: password123
+ *               email: { type: string }
+ *               password: { type: string }
  *     responses:
- *       200:
- *         description: Login successful
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/AuthResponse'
- *       401:
- *         description: Invalid credentials
+ *       200: { description: Login successful }
  */
 router.post('/login', validate(loginValidator), login);
 
@@ -121,14 +56,10 @@ router.post('/login', validate(loginValidator), login);
  *   get:
  *     summary: Get current user profile
  *     tags: [Auth]
- *     security:
- *       - bearerAuth: []
+ *     security: [{ bearerAuth: [] }]
  *     responses:
- *       200:
- *         description: User profile retrieved
- *       401:
- *         description: Not authorized
+ *       200: { description: User profile retrieved }
  */
 router.get('/me', protect, getMe);
 
-module.exports = router;
+export default router;

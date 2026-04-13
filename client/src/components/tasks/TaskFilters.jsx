@@ -10,7 +10,7 @@ const TaskFilters = ({ filters, onChange, onReset }) => {
   return (
     <div className="glass-card p-4 mb-6">
       <div className="flex flex-col lg:flex-row gap-3">
-        {/* Search */}
+
         <div className="relative flex-1">
           <HiOutlineMagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
           <input
@@ -23,7 +23,7 @@ const TaskFilters = ({ filters, onChange, onReset }) => {
           />
         </div>
 
-        {/* Status filter */}
+
         <select
           value={filters.status || ''}
           onChange={(e) => handleChange('status', e.target.value)}
@@ -36,7 +36,7 @@ const TaskFilters = ({ filters, onChange, onReset }) => {
           <option value="done">Done</option>
         </select>
 
-        {/* Priority filter */}
+
         <select
           value={filters.priority || ''}
           onChange={(e) => handleChange('priority', e.target.value)}
@@ -49,7 +49,7 @@ const TaskFilters = ({ filters, onChange, onReset }) => {
           <option value="high">High</option>
         </select>
 
-        {/* Sort */}
+
         <select
           value={filters.sort || ''}
           onChange={(e) => handleChange('sort', e.target.value)}
@@ -63,7 +63,7 @@ const TaskFilters = ({ filters, onChange, onReset }) => {
           <option value="title">Title</option>
         </select>
 
-        {/* Reset */}
+
         {hasFilters && (
           <button
             onClick={onReset}

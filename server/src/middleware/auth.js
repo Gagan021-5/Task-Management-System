@@ -1,12 +1,9 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const ApiError = require('../utils/ApiError');
-const asyncHandler = require('../utils/asyncHandler');
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
+import ApiError from '../utils/ApiError.js';
+import asyncHandler from '../utils/asyncHandler.js';
 
-/**
- * Protect routes - verify JWT token
- */
-const protect = asyncHandler(async (req, res, next) => {
+export const protect = asyncHandler(async (req, res, next) => {
   let token;
 
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
@@ -28,11 +25,7 @@ const protect = asyncHandler(async (req, res, next) => {
   next();
 });
 
-/**
- * Authorize by role
- * @param  {...string} roles - Allowed roles
- */
-const authorize = (...roles) => {
+export const authorize = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       throw ApiError.forbidden(`Role '${req.user.role}' is not authorized to access this resource`);
@@ -40,5 +33,3 @@ const authorize = (...roles) => {
     next();
   };
 };
-
-module.exports = { protect, authorize };

@@ -131,7 +131,7 @@ const TaskDetailPage = () => {
   if (loading) {
     return (
       <div className="page-container flex items-center justify-center min-h-[60vh]">
-        <div className="w-12 h-12 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin" />
+        <div className="w-12 h-12 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin" />
       </div>
     );
   }
@@ -140,7 +140,7 @@ const TaskDetailPage = () => {
 
   return (
     <div className="page-container max-w-4xl">
-      {/* Header */}
+
       <div className="flex items-center justify-between mb-6 animate-slide-up">
         <button
           onClick={() => navigate(-1)}
@@ -167,9 +167,9 @@ const TaskDetailPage = () => {
         )}
       </div>
 
-      {/* Task detail */}
+
       <div className="glass-card p-8 animate-slide-up" style={{ animationDelay: '100ms' }}>
-        {/* Title & badges */}
+
         <div className="mb-6">
           <div className="flex items-center gap-3 mb-3">
             <span className={`badge ${getStatusClass(task.status)}`}>{getStatusLabel(task.status)}</span>
@@ -178,7 +178,7 @@ const TaskDetailPage = () => {
           <h1 className="text-2xl font-bold text-white">{task.title}</h1>
         </div>
 
-        {/* Description */}
+
         {task.description && (
           <div className="mb-6">
             <h2 className="text-sm font-medium text-slate-400 mb-2">Description</h2>
@@ -186,12 +186,12 @@ const TaskDetailPage = () => {
           </div>
         )}
 
-        {/* Meta grid */}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 p-4 rounded-xl bg-slate-800/30 border border-slate-700/30">
           {task.dueDate && (
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-slate-700/50">
-                <HiOutlineCalendarDays className="w-5 h-5 text-brand-400" />
+                <HiOutlineCalendarDays className="w-5 h-5 text-cyan-400" />
               </div>
               <div>
                 <p className="text-xs text-slate-500">Due Date</p>
@@ -205,7 +205,7 @@ const TaskDetailPage = () => {
           {task.assignedTo && (
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-slate-700/50">
-                <HiOutlineUser className="w-5 h-5 text-accent-400" />
+                <HiOutlineUser className="w-5 h-5 text-indigo-400" />
               </div>
               <div>
                 <p className="text-xs text-slate-500">Assigned To</p>
@@ -238,7 +238,7 @@ const TaskDetailPage = () => {
           </div>
         </div>
 
-        {/* Documents */}
+
         <div>
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-sm font-medium text-slate-400 flex items-center gap-2">
@@ -278,7 +278,7 @@ const TaskDetailPage = () => {
                   <div className="flex items-center gap-1 flex-shrink-0">
                     <button
                       onClick={() => handleDownload(doc._id, doc.originalName)}
-                      className="p-2 rounded-lg text-slate-400 hover:text-brand-400 hover:bg-brand-400/10 transition-all"
+                      className="p-2 rounded-lg text-slate-400 hover:text-indigo-400 hover:bg-indigo-400/10 transition-all"
                       title="Download"
                     >
                       <HiOutlineDocumentArrowDown className="w-4 h-4" />
@@ -304,7 +304,7 @@ const TaskDetailPage = () => {
         </div>
       </div>
 
-      {/* Delete Modal */}
+
       <Modal isOpen={deleteModal} onClose={() => setDeleteModal(false)} title="Delete Task">
         <p className="text-slate-300 mb-6">
           Are you sure you want to delete <strong>"{task.title}"</strong>? This action cannot be undone.

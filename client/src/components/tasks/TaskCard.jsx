@@ -4,9 +4,9 @@ import { format } from 'date-fns';
 
 const TaskCard = ({ task }) => {
   const statusConfig = {
-    'todo': { badge: 'badge-todo', label: 'To Do', dot: 'bg-slate-400' },
-    'in-progress': { badge: 'badge-in-progress', label: 'In Progress', dot: 'bg-amber-400' },
-    'done': { badge: 'badge-done', label: 'Done', dot: 'bg-emerald-400' },
+    'todo': { badge: 'badge-todo', label: 'To Do' },
+    'in-progress': { badge: 'badge-in-progress', label: 'In Progress' },
+    'done': { badge: 'badge-done', label: 'Done' },
   };
 
   const priorityConfig = {
@@ -17,16 +17,10 @@ const TaskCard = ({ task }) => {
 
   const status = statusConfig[task.status];
   const priority = priorityConfig[task.priority];
-
   const isOverdue = task.dueDate && new Date(task.dueDate) < new Date() && task.status !== 'done';
 
   return (
-    <Link
-      to={`/tasks/${task._id}`}
-      className="glass-card-hover p-5 block group"
-      id={`task-card-${task._id}`}
-    >
-      {/* Top row */}
+    <Link to={`/tasks/${task._id}`} className="glass-card-hover p-5 block group" id={`task-card-${task._id}`}>
       <div className="flex items-start justify-between gap-3 mb-3">
         <h3 className="text-base font-semibold text-slate-200 group-hover:text-white transition-colors line-clamp-2">
           {task.title}
@@ -34,12 +28,10 @@ const TaskCard = ({ task }) => {
         <span className={`badge ${status.badge} flex-shrink-0`}>{status.label}</span>
       </div>
 
-      {/* Description */}
       {task.description && (
         <p className="text-sm text-slate-400 line-clamp-2 mb-4">{task.description}</p>
       )}
 
-      {/* Meta row */}
       <div className="flex items-center flex-wrap gap-3 text-xs">
         <span className={`badge ${priority.badge}`}>{priority.label}</span>
 

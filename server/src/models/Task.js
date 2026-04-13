@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const documentSchema = new mongoose.Schema({
   filename: { type: String, required: true },
@@ -33,34 +33,20 @@ const taskSchema = new mongoose.Schema(
       enum: ['low', 'medium', 'high'],
       default: 'medium',
     },
-    dueDate: {
-      type: Date,
-    },
-    assignedTo: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    },
-    createdBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
+    dueDate: { type: Date },
+    assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     documents: {
       type: [documentSchema],
       validate: {
-        validator: function (docs) {
-          return docs.length <= 3;
-        },
+        validator: (docs) => docs.length <= 3,
         message: 'A task can have a maximum of 3 documents',
       },
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-// Indexes for filtering and sorting performance
 taskSchema.index({ status: 1 });
 taskSchema.index({ priority: 1 });
 taskSchema.index({ dueDate: 1 });
@@ -68,4 +54,4 @@ taskSchema.index({ assignedTo: 1 });
 taskSchema.index({ createdBy: 1 });
 taskSchema.index({ title: 'text', description: 'text' });
 
-module.exports = mongoose.model('Task', taskSchema);
+export default mongoose.model('Task', taskSchema);

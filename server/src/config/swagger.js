@@ -1,35 +1,22 @@
-const swaggerJsdoc = require('swagger-jsdoc');
+import swaggerJsdoc from 'swagger-jsdoc';
 
 const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Task Management System API',
+      title: 'Taskify API',
       version: '1.0.0',
-      description: 'A comprehensive Task Management System with authentication, role-based access, and file uploads',
-      contact: {
-        name: 'Gagan Singh',
-      },
+      description: 'Taskify Task Management System API with authentication, role-based access, and file uploads',
+      contact: { name: 'Gagan Singh' },
     },
-    servers: [
-      {
-        url: 'http://localhost:5000',
-        description: 'Development server',
-      },
-    ],
+    servers: [{ url: 'http://localhost:5000', description: 'Development server' }],
     components: {
       securitySchemes: {
-        bearerAuth: {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT',
-        },
+        bearerAuth: { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
       },
     },
   },
   apis: ['./src/routes/*.js'],
 };
 
-const swaggerSpec = swaggerJsdoc(options);
-
-module.exports = swaggerSpec;
+export default swaggerJsdoc(options);

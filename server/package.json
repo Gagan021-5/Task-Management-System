@@ -1,12 +1,13 @@
 {
-  "name": "task-management-server",
+  "name": "taskify-server",
   "version": "1.0.0",
-  "description": "Task Management System - Backend API",
+  "type": "module",
+  "description": "Taskify - Task Management System Backend API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "test": "jest --coverage --forceExit --detectOpenHandles"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --forceExit --detectOpenHandles"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "@jest/globals": "^29.7.0",
     "mongodb-memory-server": "^10.4.0",
     "supertest": "^7.0.0"
   }

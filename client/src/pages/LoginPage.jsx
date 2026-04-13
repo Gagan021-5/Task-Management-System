@@ -31,27 +31,18 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
-      {/* Background gradient blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl" />
-      </div>
-
-      <div className="relative w-full max-w-md animate-slide-up">
-        {/* Logo */}
+    <div className="auth-page-bg flex items-center justify-center px-4" style={{ background: '#050a18' }}>
+      <div className="relative w-full max-w-md animate-slide-up" style={{ animationDelay: '100ms' }}>
         <div className="text-center mb-8">
-          <div className="inline-flex p-3 rounded-2xl gradient-brand shadow-lg shadow-brand-500/25 mb-4">
+          <div className="inline-flex p-3.5 rounded-2xl gradient-brand shadow-lg shadow-indigo-500/25 mb-4">
             <FaTasks className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold gradient-text">Welcome Back</h1>
-          <p className="text-slate-400 mt-2">Sign in to your TaskFlow account</p>
+          <p className="text-slate-400 mt-2">Sign in to your Taskify account</p>
         </div>
 
-        {/* Form */}
         <div className="glass-card p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Email */}
             <div>
               <label className="form-label">Email Address</label>
               <div className="relative">
@@ -68,7 +59,6 @@ const LoginPage = () => {
               {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
             </div>
 
-            {/* Password */}
             <div>
               <label className="form-label">Password</label>
               <div className="relative">
@@ -92,25 +82,16 @@ const LoginPage = () => {
               {errors.password && <p className="text-red-400 text-sm mt-1">{errors.password}</p>}
             </div>
 
-            {/* Submit */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="btn-primary w-full py-3"
-              id="login-submit"
-            >
+            <button type="submit" disabled={loading} className="btn-primary w-full py-3" id="login-submit">
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              ) : (
-                'Sign In'
-              )}
+              ) : 'Sign In'}
             </button>
           </form>
 
-          {/* Register link */}
           <p className="text-center text-slate-400 text-sm mt-6">
             Don't have an account?{' '}
-            <Link to="/register" className="text-brand-400 hover:text-brand-300 font-medium transition-colors">
+            <Link to="/register" className="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">
               Create one
             </Link>
           </p>

@@ -4,7 +4,7 @@ services:
   # MongoDB
   mongo:
     image: mongo:7
-    container_name: taskflow-mongo
+    container_name: taskify-mongo
     restart: unless-stopped
     ports:
       - "27017:27017"
@@ -24,7 +24,7 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-    container_name: taskflow-server
+    container_name: taskify-server
     restart: unless-stopped
     ports:
       - "5000:5000"
@@ -52,7 +52,7 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    container_name: taskflow-client
+    container_name: taskify-client
     restart: unless-stopped
     ports:
       - "3000:80"

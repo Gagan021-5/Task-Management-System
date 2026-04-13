@@ -39,42 +39,18 @@ const Dashboard = () => {
   };
 
   const statCards = [
-    {
-      title: 'Total Tasks',
-      value: stats.total,
-      icon: HiOutlineClipboardDocumentList,
-      color: 'from-brand-500 to-accent-500',
-      shadow: 'shadow-brand-500/20',
-    },
-    {
-      title: 'To Do',
-      value: stats.todo,
-      icon: HiOutlineClock,
-      color: 'from-slate-500 to-slate-600',
-      shadow: 'shadow-slate-500/20',
-    },
-    {
-      title: 'In Progress',
-      value: stats.inProgress,
-      icon: HiOutlineExclamationTriangle,
-      color: 'from-amber-500 to-orange-500',
-      shadow: 'shadow-amber-500/20',
-    },
-    {
-      title: 'Completed',
-      value: stats.done,
-      icon: HiOutlineCheckCircle,
-      color: 'from-emerald-500 to-green-500',
-      shadow: 'shadow-emerald-500/20',
-    },
+    { title: 'Total Tasks', value: stats.total, icon: HiOutlineClipboardDocumentList,
+      gradient: 'from-cyan-500 via-indigo-500 to-purple-500', shadow: 'shadow-indigo-500/20' },
+    { title: 'To Do', value: stats.todo, icon: HiOutlineClock,
+      gradient: 'from-slate-500 to-slate-600', shadow: 'shadow-slate-500/20' },
+    { title: 'In Progress', value: stats.inProgress, icon: HiOutlineExclamationTriangle,
+      gradient: 'from-amber-500 to-orange-500', shadow: 'shadow-amber-500/20' },
+    { title: 'Completed', value: stats.done, icon: HiOutlineCheckCircle,
+      gradient: 'from-emerald-500 to-green-500', shadow: 'shadow-emerald-500/20' },
   ];
 
   const getStatusBadge = (status) => {
-    const classes = {
-      'todo': 'badge-todo',
-      'in-progress': 'badge-in-progress',
-      'done': 'badge-done',
-    };
+    const classes = { 'todo': 'badge-todo', 'in-progress': 'badge-in-progress', 'done': 'badge-done' };
     const labels = { 'todo': 'To Do', 'in-progress': 'In Progress', 'done': 'Done' };
     return <span className={`badge ${classes[status]}`}>{labels[status]}</span>;
   };
@@ -87,14 +63,13 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="page-container flex items-center justify-center min-h-[60vh]">
-        <div className="w-12 h-12 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin" />
+        <div className="w-12 h-12 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
     <div className="page-container">
-      {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 animate-slide-up">
         <div>
           <h1 className="text-3xl font-bold text-white">
@@ -108,12 +83,11 @@ const Dashboard = () => {
         </Link>
       </div>
 
-      {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {statCards.map((card, idx) => (
-          <div key={card.title} className={`glass-card-hover p-6 animate-slide-up`} style={{ animationDelay: `${idx * 100}ms` }}>
+          <div key={card.title} className="glass-card-hover p-6 animate-slide-up" style={{ animationDelay: `${idx * 100}ms` }}>
             <div className="flex items-center justify-between mb-4">
-              <div className={`p-3 rounded-xl bg-gradient-to-br ${card.color} shadow-lg ${card.shadow}`}>
+              <div className={`p-3 rounded-xl bg-gradient-to-br ${card.gradient} shadow-lg ${card.shadow}`}>
                 <card.icon className="w-6 h-6 text-white" />
               </div>
               <span className="text-3xl font-bold text-white">{card.value}</span>
@@ -123,11 +97,10 @@ const Dashboard = () => {
         ))}
       </div>
 
-      {/* Recent Tasks */}
       <div className="glass-card p-6 animate-slide-up" style={{ animationDelay: '400ms' }}>
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-semibold text-white">Recent Tasks</h2>
-          <Link to="/tasks" className="text-sm text-brand-400 hover:text-brand-300 font-medium transition-colors">
+          <Link to="/tasks" className="text-sm text-indigo-400 hover:text-indigo-300 font-medium transition-colors">
             View all →
           </Link>
         </div>
@@ -148,7 +121,7 @@ const Dashboard = () => {
               <Link
                 key={task._id}
                 to={`/tasks/${task._id}`}
-                className="flex items-center justify-between p-4 rounded-xl bg-slate-800/30 border border-slate-700/30 hover:bg-slate-800/50 hover:border-slate-600/50 transition-all group"
+                className="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/[0.04] hover:bg-white/[0.05] hover:border-white/[0.08] transition-all group"
               >
                 <div className="flex-1 min-w-0">
                   <h3 className="text-sm font-medium text-slate-200 group-hover:text-white truncate transition-colors">

@@ -1,12 +1,8 @@
-const { validationResult } = require('express-validator');
-const ApiError = require('../utils/ApiError');
+import { validationResult } from 'express-validator';
+import ApiError from '../utils/ApiError.js';
 
-/**
- * Middleware to validate request using express-validator rules
- */
 const validate = (validations) => {
   return async (req, res, next) => {
-    // Run all validations
     await Promise.all(validations.map((validation) => validation.run(req)));
 
     const errors = validationResult(req);
@@ -23,4 +19,4 @@ const validate = (validations) => {
   };
 };
 
-module.exports = validate;
+export default validate;

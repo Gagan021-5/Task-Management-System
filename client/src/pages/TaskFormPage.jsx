@@ -130,14 +130,14 @@ const TaskFormPage = () => {
   if (loadingData) {
     return (
       <div className="page-container flex items-center justify-center min-h-[60vh]">
-        <div className="w-12 h-12 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin" />
+        <div className="w-12 h-12 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
     <div className="page-container max-w-3xl">
-      {/* Header */}
+
       <div className="flex items-center gap-4 mb-8 animate-slide-up">
         <button
           onClick={() => navigate(-1)}
@@ -150,10 +150,10 @@ const TaskFormPage = () => {
         </h1>
       </div>
 
-      {/* Form */}
+
       <div className="glass-card p-8 animate-slide-up" style={{ animationDelay: '100ms' }}>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Title */}
+
           <div>
             <label className="form-label">Title *</label>
             <input
@@ -167,7 +167,7 @@ const TaskFormPage = () => {
             {errors.title && <p className="text-red-400 text-sm mt-1">{errors.title}</p>}
           </div>
 
-          {/* Description */}
+
           <div>
             <label className="form-label">Description</label>
             <textarea
@@ -181,7 +181,7 @@ const TaskFormPage = () => {
             {errors.description && <p className="text-red-400 text-sm mt-1">{errors.description}</p>}
           </div>
 
-          {/* Status & Priority */}
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="form-label">Status</label>
@@ -212,7 +212,7 @@ const TaskFormPage = () => {
             </div>
           </div>
 
-          {/* Due Date & Assignee */}
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="form-label">Due Date</label>
@@ -245,11 +245,11 @@ const TaskFormPage = () => {
             )}
           </div>
 
-          {/* File Upload */}
+
           {!isEdit && (
             <div>
               <label className="form-label">Documents (PDF, max 3 files, 5MB each)</label>
-              <div className="border-2 border-dashed border-slate-700/50 rounded-xl p-6 text-center hover:border-brand-500/50 transition-colors">
+              <div className="border-2 border-dashed border-slate-700/50 rounded-xl p-6 text-center hover:border-indigo-500/50 transition-colors">
                 <HiOutlineDocumentArrowUp className="w-10 h-10 text-slate-500 mx-auto mb-2" />
                 <p className="text-sm text-slate-400 mb-3">Drop PDF files here or click to browse</p>
                 <input
@@ -268,7 +268,7 @@ const TaskFormPage = () => {
                 </label>
               </div>
 
-              {/* File list */}
+
               {files.length > 0 && (
                 <div className="mt-3 space-y-2">
                   {files.map((file, idx) => (
@@ -291,7 +291,7 @@ const TaskFormPage = () => {
             </div>
           )}
 
-          {/* Submit */}
+
           <div className="flex items-center gap-3 pt-4 border-t border-slate-700/50">
             <button
               type="submit"

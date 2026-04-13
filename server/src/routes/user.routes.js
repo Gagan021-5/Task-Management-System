@@ -1,9 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const { getUsers, getUserById, updateUser, deleteUser } = require('../controllers/userController');
-const { protect, authorize } = require('../middleware/auth');
-const validate = require('../middleware/validate');
-const { updateUserValidator } = require('../validators/user.validator');
+import { Router } from 'express';
+import { getUsers, getUserById, updateUser, deleteUser } from '../controllers/userController.js';
+import { protect, authorize } from '../middleware/auth.js';
+import validate from '../middleware/validate.js';
+import { updateUserValidator } from '../validators/user.validator.js';
+
+const router = Router();
 
 /**
  * @swagger
@@ -11,117 +12,51 @@ const { updateUserValidator } = require('../validators/user.validator');
  *   get:
  *     summary: Get all users (paginated)
  *     tags: [Users]
- *     security:
- *       - bearerAuth: []
+ *     security: [{ bearerAuth: [] }]
  *     parameters:
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *         description: Page number
- *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *         description: Items per page
- *       - in: query
- *         name: role
- *         schema:
- *           type: string
- *           enum: [user, admin]
- *         description: Filter by role
- *       - in: query
- *         name: search
- *         schema:
- *           type: string
- *         description: Search by name or email
+ *       - { in: query, name: page, schema: { type: integer } }
+ *       - { in: query, name: limit, schema: { type: integer } }
+ *       - { in: query, name: role, schema: { type: string } }
+ *       - { in: query, name: search, schema: { type: string } }
  *     responses:
- *       200:
- *         description: Users retrieved successfully
- *       401:
- *         description: Not authorized
- *       403:
- *         description: Admin access required
+ *       200: { description: Users retrieved successfully }
  */
 router.get('/', protect, authorize('admin'), getUsers);
 
-/**
- * @swagger
+/** @swagger
  * /api/users/{id}:
  *   get:
  *     summary: Get user by ID
  *     tags: [Users]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
+ *     security: [{ bearerAuth: [] }]
+ *     parameters: [{ in: path, name: id, required: true, schema: { type: string } }]
  *     responses:
- *       200:
- *         description: User retrieved successfully
- *       404:
- *         description: User not found
+ *       200: { description: User retrieved }
  */
 router.get('/:id', protect, authorize('admin'), getUserById);
 
-/**
- * @swagger
+/** @swagger
  * /api/users/{id}:
  *   put:
  *     summary: Update user
  *     tags: [Users]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *     requestBody:
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *               email:
- *                 type: string
- *               role:
- *                 type: string
- *                 enum: [user, admin]
+ *     security: [{ bearerAuth: [] }]
+ *     parameters: [{ in: path, name: id, required: true, schema: { type: string } }]
  *     responses:
- *       200:
- *         description: User updated successfully
- *       404:
- *         description: User not found
+ *       200: { description: User updated }
  */
 router.put('/:id', protect, authorize('admin'), validate(updateUserValidator), updateUser);
 
-/**
- * @swagger
+/** @swagger
  * /api/users/{id}:
  *   delete:
  *     summary: Delete user
  *     tags: [Users]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
+ *     security: [{ bearerAuth: [] }]
+ *     parameters: [{ in: path, name: id, required: true, schema: { type: string } }]
  *     responses:
- *       200:
- *         description: User deleted successfully
- *       404:
- *         description: User not found
+ *       200: { description: User deleted }
  */
 router.delete('/:id', protect, authorize('admin'), deleteUser);
 
-module.exports = router;
+export default router;

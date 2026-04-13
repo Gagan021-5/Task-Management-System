@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   testEnvironment: 'node',
   testTimeout: 30000,
   verbose: true,
@@ -6,5 +6,5 @@ module.exports = {
   clearMocks: true,
   resetModules: true,
   restoreMocks: true,
-  setupFilesAfterSetup: ['./tests/setup.js'],
+  transform: {},
 };

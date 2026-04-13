@@ -1,66 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const {
-  createTask,
-  getTasks,
-  getTaskById,
-  updateTask,
-  deleteTask,
-  uploadDocuments,
-  downloadDocument,
-  deleteDocument,
-} = require('../controllers/taskController');
-const { protect } = require('../middleware/auth');
-const validate = require('../middleware/validate');
-const { createTaskValidator, updateTaskValidator } = require('../validators/task.validator');
-const upload = require('../middleware/upload');
+import { Router } from 'express';
+import {
+  createTask, getTasks, getTaskById, updateTask, deleteTask,
+  uploadDocuments, downloadDocument, deleteDocument,
+} from '../controllers/taskController.js';
+import { protect } from '../middleware/auth.js';
+import validate from '../middleware/validate.js';
+import { createTaskValidator, updateTaskValidator } from '../validators/task.validator.js';
+import upload from '../middleware/upload.js';
 
-/**
- * @swagger
- * components:
- *   schemas:
- *     Task:
- *       type: object
- *       properties:
- *         _id:
- *           type: string
- *         title:
- *           type: string
- *         description:
- *           type: string
- *         status:
- *           type: string
- *           enum: [todo, in-progress, done]
- *         priority:
- *           type: string
- *           enum: [low, medium, high]
- *         dueDate:
- *           type: string
- *           format: date
- *         assignedTo:
- *           $ref: '#/components/schemas/User'
- *         createdBy:
- *           $ref: '#/components/schemas/User'
- *         documents:
- *           type: array
- *           items:
- *             type: object
- *             properties:
- *               _id:
- *                 type: string
- *               filename:
- *                 type: string
- *               originalName:
- *                 type: string
- *               mimetype:
- *                 type: string
- *         createdAt:
- *           type: string
- *           format: date-time
- *         updatedAt:
- *           type: string
- *           format: date-time
- */
+const router = Router();
 
 /**
  * @swagger
@@ -68,8 +16,7 @@ const upload = require('../middleware/upload');
  *   post:
  *     summary: Create a new task
  *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
+ *     security: [{ bearerAuth: [] }]
  *     requestBody:
  *       required: true
  *       content:
@@ -78,29 +25,14 @@ const upload = require('../middleware/upload');
  *             type: object
  *             required: [title]
  *             properties:
- *               title:
- *                 type: string
- *                 example: Complete project documentation
- *               description:
- *                 type: string
- *                 example: Write comprehensive docs for the API
- *               status:
- *                 type: string
- *                 enum: [todo, in-progress, done]
- *               priority:
- *                 type: string
- *                 enum: [low, medium, high]
- *               dueDate:
- *                 type: string
- *                 format: date
- *               assignedTo:
- *                 type: string
- *                 description: User ID
+ *               title: { type: string }
+ *               description: { type: string }
+ *               status: { type: string, enum: [todo, in-progress, done] }
+ *               priority: { type: string, enum: [low, medium, high] }
+ *               dueDate: { type: string, format: date }
+ *               assignedTo: { type: string }
  *     responses:
- *       201:
- *         description: Task created successfully
- *       400:
- *         description: Validation error
+ *       201: { description: Task created }
  */
 router.post('/', protect, validate(createTaskValidator), createTask);
 
@@ -108,220 +40,90 @@ router.post('/', protect, validate(createTaskValidator), createTask);
  * @swagger
  * /api/tasks:
  *   get:
- *     summary: Get all tasks (filterable, sortable, paginated)
+ *     summary: Get tasks (filterable, sortable, paginated)
  *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
+ *     security: [{ bearerAuth: [] }]
  *     parameters:
- *       - in: query
- *         name: status
- *         schema:
- *           type: string
- *           enum: [todo, in-progress, done]
- *       - in: query
- *         name: priority
- *         schema:
- *           type: string
- *           enum: [low, medium, high]
- *       - in: query
- *         name: sort
- *         schema:
- *           type: string
- *         description: "Sort field (e.g., dueDate, createdAt, priority)"
- *       - in: query
- *         name: order
- *         schema:
- *           type: string
- *           enum: [asc, desc]
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *       - in: query
- *         name: search
- *         schema:
- *           type: string
- *         description: Search in title and description
+ *       - { in: query, name: status, schema: { type: string } }
+ *       - { in: query, name: priority, schema: { type: string } }
+ *       - { in: query, name: sort, schema: { type: string } }
+ *       - { in: query, name: order, schema: { type: string } }
+ *       - { in: query, name: page, schema: { type: integer } }
+ *       - { in: query, name: limit, schema: { type: integer } }
+ *       - { in: query, name: search, schema: { type: string } }
  *     responses:
- *       200:
- *         description: Tasks retrieved successfully
+ *       200: { description: Tasks retrieved }
  */
 router.get('/', protect, getTasks);
 
-/**
- * @swagger
+/** @swagger
  * /api/tasks/{id}:
  *   get:
  *     summary: Get task by ID
  *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
+ *     security: [{ bearerAuth: [] }]
+ *     parameters: [{ in: path, name: id, required: true, schema: { type: string } }]
  *     responses:
- *       200:
- *         description: Task retrieved successfully
- *       404:
- *         description: Task not found
+ *       200: { description: Task retrieved }
  */
 router.get('/:id', protect, getTaskById);
 
-/**
- * @swagger
+/** @swagger
  * /api/tasks/{id}:
  *   put:
  *     summary: Update task
  *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *     requestBody:
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               title:
- *                 type: string
- *               description:
- *                 type: string
- *               status:
- *                 type: string
- *                 enum: [todo, in-progress, done]
- *               priority:
- *                 type: string
- *                 enum: [low, medium, high]
- *               dueDate:
- *                 type: string
- *                 format: date
- *               assignedTo:
- *                 type: string
+ *     security: [{ bearerAuth: [] }]
+ *     parameters: [{ in: path, name: id, required: true, schema: { type: string } }]
  *     responses:
- *       200:
- *         description: Task updated successfully
- *       404:
- *         description: Task not found
+ *       200: { description: Task updated }
  */
 router.put('/:id', protect, validate(updateTaskValidator), updateTask);
 
-/**
- * @swagger
+/** @swagger
  * /api/tasks/{id}:
  *   delete:
  *     summary: Delete task
  *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
+ *     security: [{ bearerAuth: [] }]
+ *     parameters: [{ in: path, name: id, required: true, schema: { type: string } }]
  *     responses:
- *       200:
- *         description: Task deleted successfully
- *       404:
- *         description: Task not found
+ *       200: { description: Task deleted }
  */
 router.delete('/:id', protect, deleteTask);
 
-/**
- * @swagger
+/** @swagger
  * /api/tasks/{id}/documents:
  *   post:
- *     summary: Upload documents to a task (max 3 PDFs, 5MB each)
+ *     summary: Upload documents (max 3 PDFs, 5MB each)
  *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *     requestBody:
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               documents:
- *                 type: array
- *                 items:
- *                   type: string
- *                   format: binary
+ *     security: [{ bearerAuth: [] }]
+ *     parameters: [{ in: path, name: id, required: true, schema: { type: string } }]
  *     responses:
- *       200:
- *         description: Documents uploaded successfully
+ *       200: { description: Documents uploaded }
  */
 router.post('/:id/documents', protect, upload.array('documents', 3), uploadDocuments);
 
-/**
- * @swagger
+/** @swagger
  * /api/tasks/{id}/documents/{docId}:
  *   get:
  *     summary: Download a document
  *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *       - in: path
- *         name: docId
- *         required: true
- *         schema:
- *           type: string
+ *     security: [{ bearerAuth: [] }]
  *     responses:
- *       200:
- *         description: File download
- *       404:
- *         description: Document not found
+ *       200: { description: File download }
  */
 router.get('/:id/documents/:docId', protect, downloadDocument);
 
-/**
- * @swagger
+/** @swagger
  * /api/tasks/{id}/documents/{docId}:
  *   delete:
  *     summary: Delete a document
  *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *       - in: path
- *         name: docId
- *         required: true
- *         schema:
- *           type: string
+ *     security: [{ bearerAuth: [] }]
  *     responses:
- *       200:
- *         description: Document deleted successfully
- *       404:
- *         description: Document not found
+ *       200: { description: Document deleted }
  */
 router.delete('/:id/documents/:docId', protect, deleteDocument);
 
-module.exports = router;
+export default router;
