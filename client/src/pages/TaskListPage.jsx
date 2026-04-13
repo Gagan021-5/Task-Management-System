@@ -52,8 +52,8 @@ const TaskListPage = () => {
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 animate-slide-up">
         <div>
-          <h1 className="text-2xl font-bold text-white">Tasks</h1>
-          <p className="text-slate-400 text-sm mt-1">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Tasks</h1>
+          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
             Manage and track all your tasks
           </p>
         </div>

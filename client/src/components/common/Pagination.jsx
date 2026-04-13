@@ -33,16 +33,16 @@ const Pagination = ({ pagination, onPageChange }) => {
 
   return (
     <div className="flex items-center justify-between mt-6">
-      <p className="text-sm text-slate-400">
-        Showing page <span className="font-medium text-slate-200">{page}</span> of{' '}
-        <span className="font-medium text-slate-200">{pages}</span> ({total} total)
+      <p className="text-sm text-slate-500 dark:text-slate-400">
+        Showing page <span className="font-medium text-slate-800 dark:text-slate-200">{page}</span> of{' '}
+        <span className="font-medium text-slate-800 dark:text-slate-200">{pages}</span> ({total} total)
       </p>
 
       <div className="flex items-center gap-1">
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={page <= 1}
-          className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+          className="p-2 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700/50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
         >
           <HiChevronLeft className="w-5 h-5" />
         </button>
@@ -54,10 +54,10 @@ const Pagination = ({ pagination, onPageChange }) => {
             disabled={num === '...'}
             className={`min-w-[36px] h-9 rounded-lg text-sm font-medium transition-all ${
               num === page
-                ? 'gradient-brand text-white shadow-lg shadow-brand-500/25'
+                ? 'bg-indigo-600 dark:bg-indigo-500 text-white shadow-lg shadow-indigo-500/25'
                 : num === '...'
-                ? 'text-slate-500 cursor-default'
-                : 'text-slate-400 hover:text-white hover:bg-slate-700/50'
+                ? 'text-slate-400 dark:text-slate-500 cursor-default'
+                : 'text-slate-600 hover:text-indigo-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700/50'
             }`}
           >
             {num}
@@ -67,7 +67,7 @@ const Pagination = ({ pagination, onPageChange }) => {
         <button
           onClick={() => onPageChange(page + 1)}
           disabled={page >= pages}
-          className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+          className="p-2 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700/50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
         >
           <HiChevronRight className="w-5 h-5" />
         </button>

@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './context/AuthContext';
 import { SocketProvider } from './context/SocketContext';
 import { TaskProvider } from './context/TaskContext';
+import { ThemeProvider } from './context/ThemeContext';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import Layout from './components/layout/Layout';
 import LoginPage from './pages/LoginPage';
@@ -14,13 +15,14 @@ import UserListPage from './pages/UserListPage';
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <SocketProvider>
-          <TaskProvider>
-            <Routes>
-              {/* Public routes */}
-              <Route path="/login" element={<LoginPage />} />
+    <ThemeProvider>
+      <Router>
+        <AuthProvider>
+          <SocketProvider>
+            <TaskProvider>
+              <Routes>
+                {/* Public routes */}
+                <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
 
               {/* Protected routes */}
@@ -54,6 +56,7 @@ function App() {
         </SocketProvider>
       </AuthProvider>
     </Router>
+    </ThemeProvider>
   );
 }
 

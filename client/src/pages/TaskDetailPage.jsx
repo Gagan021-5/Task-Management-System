@@ -144,7 +144,7 @@ const TaskDetailPage = () => {
       <div className="flex items-center justify-between mb-6 animate-slide-up">
         <button
           onClick={() => navigate(-1)}
-          className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all"
+          className="p-2 rounded-xl text-slate-500 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all"
         >
           <HiOutlineArrowLeft className="w-5 h-5" />
         </button>
@@ -175,7 +175,7 @@ const TaskDetailPage = () => {
             <span className={`badge ${getStatusClass(task.status)}`}>{getStatusLabel(task.status)}</span>
             <span className={`badge ${getPriorityClass(task.priority)}`}>{task.priority} priority</span>
           </div>
-          <h1 className="text-2xl font-bold text-white">{task.title}</h1>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">{task.title}</h1>
         </div>
 
 

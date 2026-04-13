@@ -31,14 +31,14 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="auth-page-bg flex items-center justify-center px-4" style={{ background: '#050a18' }}>
+    <div className="auth-page-bg flex items-center justify-center px-4 min-h-screen">
       <div className="relative w-full max-w-md animate-slide-up" style={{ animationDelay: '100ms' }}>
         <div className="text-center mb-8">
-          <div className="inline-flex p-3.5 rounded-2xl gradient-brand shadow-lg shadow-indigo-500/25 mb-4">
+          <div className="inline-flex p-3.5 rounded-2xl bg-indigo-600 shadow-lg shadow-indigo-500/25 mb-4">
             <FaTasks className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold gradient-text">Welcome Back</h1>
-          <p className="text-slate-400 mt-2">Sign in to your Taskify account</p>
+          <h1 className="text-3xl font-bold text-slate-800 dark:text-white">Welcome Back</h1>
+          <p className="text-slate-500 dark:text-slate-400 mt-2">Sign in to your Taskify account</p>
         </div>
 
         <div className="glass-card p-8">

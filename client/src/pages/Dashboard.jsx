@@ -40,13 +40,13 @@ const Dashboard = () => {
 
   const statCards = [
     { title: 'Total Tasks', value: stats.total, icon: HiOutlineClipboardDocumentList,
-      gradient: 'from-cyan-500 via-indigo-500 to-purple-500', shadow: 'shadow-indigo-500/20' },
+      colorClass: 'bg-indigo-600', shadow: 'shadow-indigo-500/20' },
     { title: 'To Do', value: stats.todo, icon: HiOutlineClock,
-      gradient: 'from-slate-500 to-slate-600', shadow: 'shadow-slate-500/20' },
+      colorClass: 'bg-slate-600', shadow: 'shadow-slate-500/20' },
     { title: 'In Progress', value: stats.inProgress, icon: HiOutlineExclamationTriangle,
-      gradient: 'from-amber-500 to-orange-500', shadow: 'shadow-amber-500/20' },
+      colorClass: 'bg-amber-600', shadow: 'shadow-amber-500/20' },
     { title: 'Completed', value: stats.done, icon: HiOutlineCheckCircle,
-      gradient: 'from-emerald-500 to-green-500', shadow: 'shadow-emerald-500/20' },
+      colorClass: 'bg-emerald-600', shadow: 'shadow-emerald-500/20' },
   ];
 
   const getStatusBadge = (status) => {
@@ -72,10 +72,10 @@ const Dashboard = () => {
     <div className="page-container">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 animate-slide-up">
         <div>
-          <h1 className="text-3xl font-bold text-white">
-            Welcome back, <span className="gradient-text">{user?.name?.split(' ')[0]}</span>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
+            Welcome back, <span className="text-indigo-600 dark:text-indigo-400">{user?.name?.split(' ')[0]}</span>
           </h1>
-          <p className="text-slate-400 mt-1">Here's what's happening with your tasks</p>
+          <p className="text-slate-500 dark:text-slate-400 mt-1">Here's what's happening with your tasks</p>
         </div>
         <Link to="/tasks/new" className="btn-primary" id="dashboard-new-task">
           <HiOutlinePlus className="w-5 h-5" />
@@ -87,28 +87,28 @@ const Dashboard = () => {
         {statCards.map((card, idx) => (
           <div key={card.title} className="glass-card-hover p-6 animate-slide-up" style={{ animationDelay: `${idx * 100}ms` }}>
             <div className="flex items-center justify-between mb-4">
-              <div className={`p-3 rounded-xl bg-gradient-to-br ${card.gradient} shadow-lg ${card.shadow}`}>
+              <div className={`p-3 rounded-xl ${card.colorClass} shadow-lg ${card.shadow}`}>
                 <card.icon className="w-6 h-6 text-white" />
               </div>
-              <span className="text-3xl font-bold text-white">{card.value}</span>
+              <span className="text-3xl font-bold text-slate-800 dark:text-white">{card.value}</span>
             </div>
-            <p className="text-slate-400 text-sm font-medium">{card.title}</p>
+            <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">{card.title}</p>
           </div>
         ))}
       </div>
 
       <div className="glass-card p-6 animate-slide-up" style={{ animationDelay: '400ms' }}>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-white">Recent Tasks</h2>
-          <Link to="/tasks" className="text-sm text-indigo-400 hover:text-indigo-300 font-medium transition-colors">
+          <h2 className="text-xl font-semibold text-slate-800 dark:text-white">Recent Tasks</h2>
+          <Link to="/tasks" className="text-sm text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 font-medium transition-colors">
             View all →
           </Link>
         </div>
 
         {recentTasks.length === 0 ? (
           <div className="text-center py-12">
-            <HiOutlineClipboardDocumentList className="w-16 h-16 text-slate-600 mx-auto mb-4" />
-            <p className="text-slate-400 text-lg">No tasks yet</p>
+            <HiOutlineClipboardDocumentList className="w-16 h-16 text-slate-500 mx-auto mb-4" />
+            <p className="text-slate-600 dark:text-slate-400 text-lg">No tasks yet</p>
             <p className="text-slate-500 text-sm mt-1">Create your first task to get started</p>
             <Link to="/tasks/new" className="btn-primary mt-4 inline-flex">
               <HiOutlinePlus className="w-5 h-5" />
@@ -121,10 +121,10 @@ const Dashboard = () => {
               <Link
                 key={task._id}
                 to={`/tasks/${task._id}`}
-                className="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/[0.04] hover:bg-white/[0.05] hover:border-white/[0.08] transition-all group"
+                className="flex items-center justify-between p-4 rounded-xl bg-slate-50/50 border border-slate-200 hover:bg-slate-100 hover:border-slate-300 dark:bg-white/[0.02] dark:border-white/[0.04] dark:hover:bg-white/[0.05] dark:hover:border-white/[0.08] transition-all group"
               >
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-sm font-medium text-slate-200 group-hover:text-white truncate transition-colors">
+                  <h3 className="text-sm font-medium text-slate-800 dark:text-slate-200 dark:group-hover:text-white truncate transition-colors">
                     {task.title}
                   </h3>
                   <div className="flex items-center gap-2 mt-1.5">

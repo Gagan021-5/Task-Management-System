@@ -141,11 +141,11 @@ const TaskFormPage = () => {
       <div className="flex items-center gap-4 mb-8 animate-slide-up">
         <button
           onClick={() => navigate(-1)}
-          className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all"
+          className="p-2 rounded-xl text-slate-500 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all"
         >
           <HiOutlineArrowLeft className="w-5 h-5" />
         </button>
-        <h1 className="text-2xl font-bold text-white">
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
           {isEdit ? 'Edit Task' : 'Create New Task'}
         </h1>
       </div>

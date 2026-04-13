@@ -22,7 +22,7 @@ const TaskCard = ({ task }) => {
   return (
     <Link to={`/tasks/${task._id}`} className="glass-card-hover p-5 block group" id={`task-card-${task._id}`}>
       <div className="flex items-start justify-between gap-3 mb-3">
-        <h3 className="text-base font-semibold text-slate-200 group-hover:text-white transition-colors line-clamp-2">
+        <h3 className="text-base font-semibold text-slate-800 dark:text-slate-200 group-hover:text-indigo-700 dark:group-hover:text-white transition-colors line-clamp-2">
           {task.title}
         </h3>
         <span className={`badge ${status.badge} flex-shrink-0`}>{status.label}</span>

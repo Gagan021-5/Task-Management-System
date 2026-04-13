@@ -95,8 +95,8 @@ const UserListPage = () => {
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 animate-slide-up">
         <div>
-          <h1 className="text-2xl font-bold text-white">User Management</h1>
-          <p className="text-slate-400 text-sm mt-1">Manage registered users and their roles</p>
+          <h1 className="text-2xl font-bold text-slate-800 dark:text-white">User Management</h1>
+          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Manage registered users and their roles</p>
         </div>
       </div>
 
@@ -140,13 +140,13 @@ const UserListPage = () => {
               </thead>
               <tbody className="divide-y divide-slate-700/30">
                 {users.map((u) => (
-                  <tr key={u._id} className="hover:bg-slate-800/30 transition-colors">
+                  <tr key={u._id} className="hover:bg-slate-100 dark:hover:bg-slate-800/30 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-xl gradient-brand flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+                        <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
                           {u.name.charAt(0).toUpperCase()}
                         </div>
-                        <span className="text-sm font-medium text-slate-200">{u.name}</span>
+                        <span className="text-sm font-medium text-slate-800 dark:text-slate-200">{u.name}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-sm text-slate-400">{u.email}</td>
@@ -163,7 +163,7 @@ const UserListPage = () => {
                       <div className="flex items-center justify-end gap-1">
                         <button
                           onClick={() => openEditModal(u)}
-                          className="p-2 rounded-lg text-slate-400 hover:text-indigo-400 hover:bg-indigo-400/10 transition-all"
+                          className="p-2 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-slate-200 dark:text-slate-400 dark:hover:text-indigo-400 dark:hover:bg-indigo-400/10 transition-all"
                           title="Edit"
                         >
                           <HiOutlinePencilSquare className="w-4 h-4" />
@@ -171,7 +171,7 @@ const UserListPage = () => {
                         {u._id !== currentUser?._id && (
                           <button
                             onClick={() => openDeleteModal(u)}
-                            className="p-2 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-400/10 transition-all"
+                            className="p-2 rounded-lg text-slate-500 hover:text-red-500 hover:bg-red-100 dark:text-slate-400 dark:hover:text-red-400 dark:hover:bg-red-400/10 transition-all"
                             title="Delete"
                           >
                             <HiOutlineTrash className="w-4 h-4" />
